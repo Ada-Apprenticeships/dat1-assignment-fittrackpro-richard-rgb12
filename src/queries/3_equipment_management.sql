@@ -2,10 +2,16 @@
 .mode column
 
 -- 3.1 
-
+SELECT equipment_id, name, next_maintenance_date
+FROM equipment
+WHERE next_maintenance_date BETWEEN '2025-01-01' AND '2025-01-31';
 
 -- 3.2 
-
+SELECT type AS equipment_type, COUNT(type) AS count
+FROM equipment
+GROUP BY equipment_type;
 
 -- 3.3 
-
+SELECT type AS equipment_type, ROUND(AVG(julianday('now', 'localtime') - julianday(purchase_date))) AS avg_age_days
+FROM equipment
+GROUP BY equipment_type;

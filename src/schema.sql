@@ -44,7 +44,7 @@ CREATE TABLE staff (
     staff_id INTEGER PRIMARY KEY,
     first_name VARCHAR(255),
     last_name VARCHAR(255),
-    email CHECK(email LIKE '%@%.%'),
+    email VARCHAR(255) CHECK(email LIKE '%@fittrackpro.com'),
     phone_number CHAR(13) CHECK(phone_number LIKE '07%'),
     position VARCHAR(255) CHECK(position IN('Trainer', 'Manager', 'Receptionist', 'Maintenance')),
     hire_date DATE,
@@ -103,7 +103,7 @@ CREATE TABLE attendance (
     FOREIGN KEY(member_id) REFERENCES members(member_id)
 );
 
-CREATE TABLE class_attendence (
+CREATE TABLE class_attendance (
     class_attendance_id INTEGER NOT NULL PRIMARY KEY,
     schedule_id INTEGER NOT NULL,	
     member_id INTEGER NOT NULL,	
