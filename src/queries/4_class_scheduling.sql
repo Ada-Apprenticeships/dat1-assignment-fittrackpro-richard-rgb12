@@ -4,8 +4,8 @@
 -- 4.1 
 SELECT 
     c.class_id, 
-    name AS class_name, 
-    CONCAT(first_name, ' ', last_name) AS instructor_name
+    c.name AS class_name, 
+    CONCAT(s.first_name, ' ', s.last_name) AS instructor_name
 FROM classes c
 INNER JOIN class_schedule cs
 ON c.class_id = cs.class_id
@@ -25,13 +25,13 @@ INNER JOIN class_schedule cs
 ON c.class_id = cs.class_id
 LEFT JOIN class_attendance ca
 ON cs.schedule_id = ca.schedule_id
-WHERE start_time LIKE '2025-02-01%'
+WHERE cs.start_time LIKE '2025-02-01%'
 GROUP BY ca.schedule_id;
 
 -- 4.3 
 INSERT INTO class_attendance(schedule_id,member_id,attendance_status)
 VALUES(1, 11, 'Registered');
--- 4.4 
+-- -- 4.4 
 DELETE FROM class_attendance
 WHERE member_id = 3 AND schedule_id = 7;
 

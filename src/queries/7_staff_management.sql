@@ -2,12 +2,18 @@
 .mode column
 
 -- 7.1 
-SELECT staff_id, first_name, last_name, position as role
+SELECT 
+    staff_id, 
+    first_name, 
+    last_name, 
+    position AS role
 FROM staff;
 
 -- 7.2 
-
-SELECT pts.staff_id AS trainer_id, CONCAT(first_name, ' ', last_name) AS trainer_name, COUNT(session_id) AS session_count
+SELECT 
+    pts.staff_id AS trainer_id, 
+    CONCAT(s.first_name, ' ', s.last_name) AS trainer_name, 
+    COUNT(pts.session_id) AS session_count
 FROM personal_training_sessions pts
 INNER JOIN staff s
 ON pts.staff_id = s.staff_id

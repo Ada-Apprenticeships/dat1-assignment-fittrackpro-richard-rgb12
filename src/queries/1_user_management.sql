@@ -55,4 +55,4 @@ FROM (
     WHERE attendance_status = 'Attended'
     GROUP BY member_id
     HAVING COUNT(*) >= 2
-)
+);
