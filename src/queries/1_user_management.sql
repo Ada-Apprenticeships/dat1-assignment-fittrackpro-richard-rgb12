@@ -18,7 +18,7 @@ SET
 WHERE member_id = 5;
 
 -- 1.3
-SELECT COUNT(*) AS membersCount
+SELECT COUNT(*) AS total_members
 FROM members;
 
 -- 1.4
@@ -28,7 +28,7 @@ SELECT
     m.last_name, 
     COUNT(ca.class_attendance_id) AS registration_count
 FROM members m
-INNER JOIN class_attendance ca
+LEFT JOIN class_attendance ca
 ON m.member_id = ca.member_id
 GROUP BY m.member_id
 ORDER BY registration_count DESC

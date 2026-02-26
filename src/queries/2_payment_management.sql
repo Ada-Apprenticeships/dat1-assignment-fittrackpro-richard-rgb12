@@ -10,8 +10,10 @@ SELECT
     STRFTIME('%Y-%m', payment_date) AS month, 
     SUM(amount) AS total_revenue
 FROM payments
-WHERE payment_date BETWEEN '2024-11' AND '2025-02'
-GROUP BY month;
+WHERE DATE(payment_date) BETWEEN '2024-11-01' AND '2025-02-31'
+AND payment_type = 'Monthly membership fee'
+GROUP BY month
+ORDER BY month;
 
 -- 2.3 
 SELECT 

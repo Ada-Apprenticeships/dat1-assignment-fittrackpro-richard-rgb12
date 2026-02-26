@@ -3,6 +3,20 @@
 
 PRAGMA foreign_keys = ON;
 
+DROP TABLE IF EXISTS locations;
+DROP TABLE IF EXISTS members;
+DROP TABLE IF EXISTS staff;
+DROP TABLE IF EXISTS equipment;
+DROP TABLE IF EXISTS classes;
+DROP TABLE IF EXISTS class_schedule;
+DROP TABLE IF EXISTS memberships;
+DROP TABLE IF EXISTS attendance;
+DROP TABLE IF EXISTS class_attendence;
+DROP TABLE IF EXISTS payments;
+DROP TABLE IF EXISTS personal_training_sessions;
+DROP TABLE IF EXISTS member_health_metrics;
+DROP TABLE IF EXISTS equipment_maintenance_log;
+
 CREATE TABLE locations (
     location_id INTEGER PRIMARY KEY,
     name VARCHAR(255),

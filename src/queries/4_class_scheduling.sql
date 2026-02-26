@@ -3,15 +3,14 @@
 
 -- 4.1 
 SELECT 
-    c.class_id, 
+    DISTINCT c.class_id, 
     c.name AS class_name, 
-    CONCAT(s.first_name, ' ', s.last_name) AS instructor_name
+    s.first_name || ' ' || s.last_name AS instructor_name
 FROM classes c
 INNER JOIN class_schedule cs
 ON c.class_id = cs.class_id
 INNER JOIN staff s
-ON cs.staff_id = s.staff_id
-GROUP BY c.class_id;
+ON cs.staff_id = s.staff_id;
 
 -- 4.2 
 SELECT 
@@ -22,11 +21,12 @@ SELECT
     c.capacity - COUNT(ca.member_id ) AS available_spots
 FROM classes c
 INNER JOIN class_schedule cs
-ON c.class_id = cs.class_id
+    ON c.class_id = cs.class_id
 LEFT JOIN class_attendance ca
-ON cs.schedule_id = ca.schedule_id
-WHERE cs.start_time LIKE '2025-02-01%'
-GROUP BY ca.schedule_id;
+    ON cs.schedule_id = ca.schedule_id
+WHERE ca.attendance_status IN ('Registered', 'Attended')
+    AND DATE(cs.start_time) ='2025-02-01'
+GROUP BY cs.schedule_id;
 
 -- 4.3 
 INSERT INTO class_attendance(schedule_id,member_id,attendance_status)
@@ -46,7 +46,7 @@ ON ca.schedule_id = cs.schedule_id
 INNER JOIN classes c
 ON cs.class_id = c.class_id
 WHERE attendance_status = 'Registered'
-GROUP BY class_name
+GROUP BY cs.class_id
 ORDER BY registration_count DESC
 LIMIT 1;
 
@@ -57,6 +57,7 @@ FROM (
         member_id, 
         COUNT(*) AS class_count
     FROM class_attendance
+    WHERE attendance_status IN ('Registered', 'Attended')
     GROUP BY member_id
 );
 

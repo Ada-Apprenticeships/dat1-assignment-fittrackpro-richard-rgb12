@@ -33,7 +33,7 @@ LIMIT 1;
 
 -- 6.4 
 SELECT 
-    name,
+    l.name as location_name,
     ROUND(
         CASE 
             WHEN MIN(check_in_time) IS NULL THEN 0

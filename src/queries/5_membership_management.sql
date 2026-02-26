@@ -32,4 +32,5 @@ SELECT
 FROM memberships ms
 INNER JOIN members m
 ON ms.member_id = m.member_id
-WHERE ms.end_date LIKE '2025%';
+WHERE DATE(ms.end_date) BETWEEN '2025-01-01'
+AND '2026-01-01';
